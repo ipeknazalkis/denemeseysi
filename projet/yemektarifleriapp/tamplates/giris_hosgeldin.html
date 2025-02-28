@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+    <h2>Merhaba, {{ user.first_name }} {{ user.last_name }}</h2>
+    <a href="{% url 'logout' %}">Çıkış Yap</a>
+{% else %}
+    <a href="{% url 'login' %}">Giriş Yap</a>
+{% endif %}
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; }
+        .search-container { flex: 1; display: flex; justify-content: flex-start; }
+        .search-container input { padding: 5px; width: 200px; border: 1px solid #ccc; border-radius: 5px; }
+        .profile-container { display: flex; align-items: center; gap: 10px; }
+        .profile-pic { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; object-fit: cover; }
+        .settings-icon { width: 30px; height: 30px; cursor: pointer; }
+        .tarif-container { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; }
+        .tarif-card { border: 1px solid #ddd; padding: 10px; width: 250px; border-radius: 5px; }
+        .tarif-card img { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <!-- Sol Üst Köşede Arama Çubuğu -->
+        <div class="search-container">
+            <form method="GET" action="{% url 'home' %}">
+                <input type="text" name="q" placeholder="Tarif Ara..." value="{{ request.GET.q }}">
+                <button type="submit">Ara</button>
+            </form>
+        </div>
+
+        <h1>Ana Sayfa</h1>
+        
+        {% if user.is_authenticated %}
+        <div class="profile-container">
+            <a href="{% url 'profil' %}">
+                <img class="profile-pic" src="{{ user.ayarla.profil_fotografi|default:'/static/default-profile.png' }}" alt="Profil Resmi">
+            </a>
+            <a href="{% url 'ayarlar' %}">
+                <img class="settings-icon" src="/static/settings-icon.png" alt="Ayarlar">
+            </a>
+        </div>
+        {% else %}
+            <a href="{% url 'login' %}">Giriş Yap</a>
+        {% endif %}
+    </div>
+
+    <h2>Tarifler</h2>
+    <div class="tarif-container">
+        {% for tarif in tarifler %}
+        <div class="tarif-card">
+            <h3>{{ tarif.isim }}</h3>
+            <p><strong>Kategori:</strong> {{ tarif.kategori }}</p>
+            <p><strong>Kalori:</strong> {{ tarif.kalori }}</p>
+            <a href="{% url 'tarif_detay' tarif.id %}">Detayları Gör</a>
+        </div>
+        {% empty %}
+        <p>Sonuç bulunamadı.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
