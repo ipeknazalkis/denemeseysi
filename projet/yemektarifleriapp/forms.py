@@ -59,6 +59,8 @@ class LoginForm(forms.Form):
         if not user.check_password(sifre):
             raise forms.ValidationError('Şifre hatalı')
 
+        cleaned_data['user'] = user
+        return cleaned_data
 
 
 # myapp/forms.py
@@ -82,4 +84,5 @@ class ResetPasswordForm(forms.Form):
         if yeni_sifre and sifre_dogrulama and yeni_sifre != sifre_dogrulama:
             raise forms.ValidationError('Parolalar eşleşmiyor')
 
+        return cleaned_data
 
