@@ -86,27 +86,4 @@ class ResetPasswordForm(forms.Form):
 
 
 
-from django import forms
-from django.contrib.auth.models import User
-from .models import Profil, Tarif
-
-class KayitForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password')
-
-class ProfilForm(forms.ModelForm):
-    class Meta:
-        model = Profil
-        fields = ('foto',)
-
-class TarifForm(forms.ModelForm):
-    class Meta:
-        model = Tarif
-        fields = ('isim', 'icerik', 'foto', 'kategori')
-
-class PasswordResetForm(forms.Form):
-    email = forms.EmailField(max_length=255)
-
-
 
