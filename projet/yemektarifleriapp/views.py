@@ -37,6 +37,10 @@ def giris_view(request):
     
     return render(request, 'giris.html', {'form': form})
 
+def giris_hosgeldin_view(request, ad, soyad):
+    return render(request, 'giris_hoshosgeldin.html', {'ad': ad, 'soyad': soyad}
+
+                
 
 # myapp/views.py
 from django.contrib.auth.tokens import default_token_generator
