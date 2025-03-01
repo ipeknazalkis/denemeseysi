@@ -1,51 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="header">
-        <div class="profile-section">
-            <img src="{{ user.profil.foto.url }}" alt="Profil Fotoğrafı">
-            <a href="{% url 'profil' %}">Profil</a>
-            <i class="fa fa-cog" aria-hidden="true"></i> <!-- Ayarlar simgesi -->
-        </div>
-        <div class="search-section">
-            <input type="text" placeholder="Arama...">
-            <button>Ara</button>
-        </div>
-        <div class="categories-section">
-            <button id="categories-button">Kategoriler</button>
-            <div id="categories-dropdown">
-                <ul>
-                    {% for kategori in kategoriler %}
-                        <li><a href="#">{{ kategori.isim }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
+    <h1>Anasayfa</h1>
     
-    <div class="popular-recipes">
-        <h2>En Çok Beğenilen Tarifler</h2>
-        <ul>
-            {% for tarif in popular_tarifler %}
-                <li>
-                    <img src="{{ tarif.foto.url }}" alt="Tarif Fotoğrafı">
-                    <h3>{{ tarif.isim }}</h3>
-                    <p>Beğeni Sayısı: {{ tarif.begeni_sayisi }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+    <h2>Profil Bilgileri</h2>
+    <p>Profil Fotoğrafı: {{ user.profil.foto.url }}</p>
+    <p><a href="{% url 'profil' %}">Profil</a></p>
     
-    <div class="most-commented-recipes">
-        <h2>En Çok Yorum Alan Tarifler</h2>
-        <ul>
-            {% for tarif in en_cok_yorum_alan_tarifler %}
-                <li>
-                    <img src="{{ tarif.foto.url }}" alt="Tarif Fotoğrafı">
-                    <h3>{{ tarif.isim }}</h3>
-                    <p>Yorum Sayısı: {{ tarif.yorum_sayisi }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+    <h2>Arama Çubuğu</h2>
+    <form>
+        <input type="text" placeholder="Arama...">
+        <button>Ara</button>
+    </form>
+    
+    <h2>Kategoriler</h2>
+    <ul>
+        {% for kategori in kategoriler %}
+            <li>{{ kategori.isim }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>En Çok Beğenilen Tarifler</h2>
+    <ul>
+        {% for tarif in popular_tarifler %}
+            <li>
+                <p>İsim: {{ tarif.isim }}</p>
+                <p>Fotoğraf: {{ tarif.foto.url }}</p>
+                <p>Beğeni Sayısı: {{ tarif.begeni_sayisi }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <h2>En Çok Yorum Alan Tarifler</h2>
+    <ul>
+        {% for tarif in en_cok_yorum_alan_tarifler %}
+            <li>
+                <p>İsim: {{ tarif.isim }}</p>
+                <p>Fotoğraf: {{ tarif.foto.url }}</p>
+                <p>Yorum Sayısı: {{ tarif.yorum_sayisi }}</p>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
