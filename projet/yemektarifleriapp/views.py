@@ -1,17 +1,23 @@
+# myapp/views.py
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from .forms import KayitFormu
+from .forms import CustomUserRegisterForm
 
-def kayit_ol(request):
-    if request.method == "POST":
-        form = KayitFormu(request.POST)
+def register_view(request):
+    if request.method == 'POST':
+        form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
-            kullanici = form.save()
-            login(request, kullanici)  
-            return redirect("anasayfa")  
+            user = form.save()
+            return redirect('greeting', ad=user.ad, soyad=user.soyad)
     else:
-        form = KayitFormu()
-    return render(request, "kayit.html", {"form": form})
+        form = CustomUserRegisterForm()
+    
+    return render(request, 'register.html', {'form': form})
+
+def greeting_view(request, first_name, last_name):
+    return render(request, 'greeting.html', {'first_name': first_name, 'last_name': last_name})
+
+
+
 
 def hosgeldin(request):
     return render(request, "hesaplar/hosgeldin.html", {"kullanici": request.user})
