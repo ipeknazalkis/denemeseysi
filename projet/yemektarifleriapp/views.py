@@ -103,3 +103,19 @@ def sifre_sifirlama(request, uidb64, token):
 
 
 
+
+from django.shortcuts import render
+from .models import Tarif
+
+def anasayfa_view(request):
+    popular_tarifler = Tarif.objects.order_by('-begeni_sayisi')[:5]
+    en_cok_yorum_alan_tarifler = Tarif.objects.order_by('-yorum_sayisi')[:5]
+    
+    context = {
+        'popular_tarifler': popular_tarifler,
+        'en_cok_yorum_alan_tarifler': en_cok_yorum_alan_tarifler,
+    }
+    
+    return render(request, 'anasayfa.html', context)
+
+
