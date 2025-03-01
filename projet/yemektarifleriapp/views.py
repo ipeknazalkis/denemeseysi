@@ -70,34 +70,34 @@ def sifre_unuttum(request):
 
 
 
+    # myapp/views.py
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth import get_user_model
+from django.shortcuts import render, redirect
+from .forms import ResetPasswordForm
 
+def sifre_sifirlama(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = get_user_model().objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
+        user = None
 
-from django.shortcuts import render
-
-def dashboard(request):
-    return render(request, "dashboard.html")
-
-
-
-
-
-from django.shortcuts import render
-from .models import Tarif, Yorum, Begeni
-
-def home(request):
-    tarifler = Tarif.objects.all()
-    return render(request, "home.html", {"tarifler": tarifler})
-
-
-
-from django.shortcuts import render
-from .models import Tarif
-
-def home(request):
-    query = request.GET.get("q", "")
-    if query:
-        tarifler = Tarif.objects.filter(isim__icontains=query)
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            form = ResetPasswordForm(request.POST)
+            if form.is_valid():
+                user.set_password(form.cleaned_data['yeni_sifre'])
+                user.save()
+                return redirect('giris')
+        else:
+            form = ResetPasswordForm()
+        return render(request, 'sifre_sifirlama.html', {'form': form})
     else:
-        tarifler = Tarif.objects.all()
+        return render(request, 'sifre_sifirlama.html', {'error': 'Geçersiz link'})
+
+
+
+
     
     return render(request, "home.html", {"tarifler": tarifler, "query": query})
