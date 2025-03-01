@@ -1,0 +1,8 @@
+# myapp/urls.py
+from django.urls import path
+from .views import sifre_sifirlama
+
+urlpatterns = [
+    # ... diğer URL'ler ...
+    path('sifre-sifirla/<uidb64>/<token>/', sifre_sifirlama, name='sifre_sifirlama_dogrulaması'),
+]
