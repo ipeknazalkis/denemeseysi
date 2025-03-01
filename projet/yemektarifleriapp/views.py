@@ -2,19 +2,19 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUserRegisterForm
 
-def register_view(request):
+def kayit_view(request):
     if request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('greeting', ad=user.ad, soyad=user.soyad)
+            return redirect('hosgeldin', ad=user.ad, soyad=user.soyad)
     else:
         form = CustomUserRegisterForm()
     
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'kayit.html', {'form': form})
 
-def greeting_view(request, first_name, last_name):
-    return render(request, 'greeting.html', {'first_name': first_name, 'last_name': last_name})
+def hosgeldin_view(request, first_name, last_name):
+    return render(request, 'hoshosgeldin.html', {'first_name': first_name, 'last_name': last_name})
 
 
 
