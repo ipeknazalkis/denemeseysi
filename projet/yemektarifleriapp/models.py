@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
 
     USERNAME_FIELD = "username"
     EMAIL_FIELD = "email"
-    REQUIRED_FIELDS = ["ad", "soyad"]
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     def __str__(self):
         return f"{self.ad} {self.soyad} ({self.username})"
