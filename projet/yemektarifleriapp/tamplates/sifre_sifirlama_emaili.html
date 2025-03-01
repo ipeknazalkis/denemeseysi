@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Şifre Sıfırlama</h1>
-    <p>Merhaba {{ user.ad }} {{ user.soyad }},</p>
+    <p>Merhaba {{ user.first_name }} {{ user.last_name }},</p>
     <p>Aşağıdaki linke tıklayarak şifrenizi sıfırlayabilirsiniz:</p>
     <p><a href="http://{{ domain }}{% url 'sifre_sifirlama_dogrulamasi' uidb64=uid token=token %}">Şifre Sıfırla</a></p>
     <p>İyi günler.</p>
