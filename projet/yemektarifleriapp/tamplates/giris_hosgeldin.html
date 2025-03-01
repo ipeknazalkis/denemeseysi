@@ -1,7 +1,10 @@
 {% if user.is_authenticated %}
-    <h2>Merhaba, {{ user.first_name }} {{ user.last_name }}</h2>
-    <a href="{% url 'logout' %}">Çıkış Yap</a>
+    <div class="welcome-message">
+        <h2>Tekrardan Merhaba, {{ user.first_name }} {{ user.last_name }}</h2>
+        <p><a href="{% url 'giris' %}">Ana Sayfa</a></p>
+    </div>
 {% else %}
-    <a href="{% url 'login' %}">Giriş Yap</a>
+    <div class="login-redirect">
+        <p><a href="{% url 'giris' %}">Giriş Yap</a></p>
+    </div>
 {% endif %}
-
