@@ -13,7 +13,7 @@ def kayit_view(request):
     
     return render(request, 'kayit.html', {'form': form})
 
-def kayit_hosgeldin_view(request, first_name, last_name):
+def kayit_hosgeldin_view(request, ad, soyad):
     return render(request, 'kayit_hoshosgeldin.html', {'ad': ad, 'soyad': soyad})
 
 
@@ -31,7 +31,7 @@ def giris_view(request):
         if form.is_valid():
             user = form.cleaned_data['user']
             login(request, user)
-            return redirect('giris_hosgeldin', ad=user.ad, soyad=user.soyad
+            return redirect('giris_hosgeldin', ad=user.ad, soyad=user.soyad)
     else:
         form = LoginForm()
     
