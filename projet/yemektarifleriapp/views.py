@@ -13,7 +13,7 @@ def kayit_view(request):
     
     return render(request, 'kayit.html', {'form': form})
 
-def kayit_hosgeldin_view(request, ad, soyad):
+def kayit_hosgeldin_view(request, first_name, last_name):
     return render(request, 'kayit_hoshosgeldin.html', {'first_name': first_name, 'last_name': last_name})
 
 
