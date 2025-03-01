@@ -1,8 +1,13 @@
-# myapp/urls.py
-from django.urls import path
-from .views import sifre_sifirlama
+{% extends "base.html" %}
 
-urlpatterns = [
-    # ... diğer URL'ler ...
-    path('sifre-sifirla/<uidb64>/<token>/', sifre_sifirlama, name='sifre_sifirlama_dogrulaması'),
-]
+{% block content %}
+    <h1>Şifre Sıfırla</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Şifreyi Değiştir</button>
+    </form>
+    {% if error %}
+        <p style="color: red">{{ error }}</p>
+    {% endif %}
+{% endblock %}
