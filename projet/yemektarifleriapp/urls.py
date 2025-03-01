@@ -1,11 +1,12 @@
 # myapp/urls.py
 from django.urls import path
-from .views import register_view, greeting_view
+from .views import kayit_view, kayit_hosgeldin_view
 
 urlpatterns = [
-    path('kayit/', register_view, name='register'),
-    path('merhaba/<str:first_name>/<str:last_name>/', greeting_view, name='greeting'),
+    path('kayit/', kayit_view, name='ksyit'),
+    path('merhaba/<str:ad>/<str:soyad>/', kayit_hosgeldin_view, name='kayit_hosgeldin'),
 ]
+
 
 
 from django.urls import path
