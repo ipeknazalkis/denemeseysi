@@ -7,14 +7,14 @@ def kayit_view(request):
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('kayit_hosgeldin', ad=user.ad, soyad=user.soyad)
+            return redirect('kayit_hosgeldin', first_name=user.first_name, last_name=user.last_name)
     else:
         form = CustomUserRegisterForm()
     
     return render(request, 'kayit.html', {'form': form})
 
 def kayit_hosgeldin_view(request, ad, soyad):
-    return render(request, 'kayit_hoshosgeldin.html', {'ad': ad, 'soyad': soyad})
+    return render(request, 'kayit_hoshosgeldin.html', {'first_name': first_name, 'last_name': last_name})
 
 
 
@@ -31,14 +31,14 @@ def giris_view(request):
         if form.is_valid():
             user = form.cleaned_data['user']
             login(request, user)
-            return redirect('giris_hosgeldin', ad=user.ad, soyad=user.soyad)
+            return redirect('giris_hosgeldin', first_name=user.first_name, last_name=user.last_name)
     else:
         form = LoginForm()
     
     return render(request, 'giris.html', {'form': form})
 
-def giris_hosgeldin_view(request, ad, soyad):
-    return render(request, 'giris_hoshosgeldin.html', {'ad': ad, 'soyad': soyad}
+def giris_hosgeldin_view(request, first_name, last_name):
+    return render(request, 'giris_hoshosgeldin.html', {'first_name': first_name, 'last_name': last_name}
 
                 
 
