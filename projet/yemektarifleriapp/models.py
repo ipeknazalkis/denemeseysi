@@ -3,8 +3,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    ad = models.CharField(max_length=255)
-    soyad = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     dogum_tarihi = models.DateField(null=True, blank=True)
     boy = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True) 
