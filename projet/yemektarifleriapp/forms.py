@@ -34,3 +34,33 @@ class CustomUserRegisterForm(UserCreationForm):
             user.save()
         
         return user
+
+
+
+# myapp/forms.py
+from django import forms
+from django.contrib.auth import get_user_model
+
+class LoginForm(forms.Form):
+    giris = forms.CharField(max_length=255)
+    sifre = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        giris = cleaned_data.get('login')
+        sifre = cleaned_data.get('password')
+
+        try:
+            user = get_user_model().objects.get(kullanici_adi=login)
+        except get_user_model().DoesNotExist:
+            try:
+                user = get_user_model().objects.get(email=login)
+            except get_user_model().DoesNotExist:
+                raise forms.ValidationError('Kullanıcı adı veya e-posta hatalı')
+
+        if not user.check_sifre(sifre):
+            raise forms.ValidationError('Şifre hatalı')
+
+        cleaned_data['user'] = user
+        return cleaned_data
+
