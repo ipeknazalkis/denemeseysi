@@ -38,7 +38,7 @@ def giris_view(request):
     return render(request, 'giris.html', {'form': form})
 
 def giris_hosgeldin_view(request, first_name, last_name):
-    return render(request, 'giris_hoshosgeldin.html', {'first_name': first_name, 'last_name': last_name}
+    return render(request, 'giris_hoshosgeldin.html', {'first_name': first_name, 'last_name': last_name})
 
                 
 
