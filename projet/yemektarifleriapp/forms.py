@@ -8,15 +8,13 @@ class CustomUserRegisterForm(UserCreationForm):
     ad = forms.CharField(max_length=255, required=True, label="Ad")
     soyad = forms.CharField(max_length=255, required=True, label="Soyad")
     email = forms.EmailField(required=True, label="E-Posta")
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    pasword2 = forms.CharField(widget=forms.PasswordInput)
     dogum_tarihi = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     boy = forms.DecimalField(max_digits=5, decimal_places=2)
     kilo = forms.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:
         model = get_user_model()
-        fields = ["kullanici_adi", "ad", "soyad", "email", "password1", "password2", "dogum_tarihi", "boy", "kilo"]
+        fields = ["username", "ad", "soyad", "email", "password1", "password2", "dogum_tarihi", "boy", "kilo"]
 
     def clean(self):
         cleaned_data = super().clean()
@@ -58,7 +56,7 @@ class LoginForm(forms.Form):
             except get_user_model().DoesNotExist:
                 raise forms.ValidationError('Kullanıcı adı veya e-posta hatalı')
 
-        if not user.check_sifre(sifre):
+        if not user.check_password(sifre):
             raise forms.ValidationError('Şifre hatalı')
 
 
@@ -76,7 +74,7 @@ class ResetPasswordForm(forms.Form):
         yeni_sifre = cleaned_data.get('yeni_sifre')
         sifre_dogrulama = cleaned_data.get('sifre_dogrulama')
 
-        if yeni_sifre and sifre_dogrulama and yeni_sifre != sifre_dogrulama:
+        if yeni_sifre != sifre_dogrulama:
             raise forms.ValidationError('Parolalar eşleşmiyor')
 
         return cleaned_data
