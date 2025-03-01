@@ -20,20 +20,14 @@ urlpatterns = [
 ]
 
 
+# myapp/urls.py
 from django.urls import path
-from .views import home, profil, ayarlar
+from .views import reset_password
 
 urlpatterns = [
-    path("", home, name="home"),
-    path("profil/", profil, name="profil"),
-    path("ayarlar/", ayarlar, name="ayarlar"),
+    # ... diğer URL'ler ...
+    path('sifre-sifirla/<uidb64>/<token>/', reset_password, name='sifre_sifirlama_dogrulaması'),
 ]
 
 
 
-from django.urls import path
-from .views import home
-
-urlpatterns = [
-    path("", home, name="home"),
-]
