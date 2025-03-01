@@ -126,7 +126,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-import os
+# settings.py
+INSTALLED_APPS = [
+    # ...
+    'myapp.apps.MyappConfig',
+]
 
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+AUTH_USER_MODEL = 'myapp.CustomUser'
+
+# Veritabanını oluşturun
+python manage.py makemigrations
+python manage.py migrate
