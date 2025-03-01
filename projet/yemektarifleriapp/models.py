@@ -10,12 +10,9 @@ class CustomUser(AbstractUser):
     boy = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True) 
     kilo = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)  
 
-    USERNAME_FIELD = "kullanici.adi"
+    USERNAME_FIELD = "username"
     EMAIL_FIELD = "email"
-    REQUIRED_FIELDS = ["email", "ad", "soyad"]
-
-    def _str_(self):
-        return self.kullanici.adi
+    REQUIRED_FIELDS = ["ad", "soyad"]
 
     def __str__(self):
-        return f"{self.ad} {self.soyad} ({self.kullanici_adi})"
+        return f"{self.ad} {self.soyad} ({self.username})"
