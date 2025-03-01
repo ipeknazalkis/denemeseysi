@@ -13,4 +13,5 @@ urlpatterns = [
 
     path('sifremi-unuttum/', sifre_unuttum, name='sifre_unuttum'),
     path('sifre-sifirla/<uidb64>/<token>/', sifre_sifirlama, name='sifre_sifirlama'),
+    path('sifre-sifirlama/tamam/', PasswordResetCompleteView.as_view(), name='sifre_sifirmala_tamamlandi'),
 ]
