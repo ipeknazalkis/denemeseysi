@@ -76,11 +76,6 @@ class ResetPasswordForm(forms.Form):
         yeni_sifre = cleaned_data.get('yeni_sifre')
         sifre_dogrulama = cleaned_data.get('sifre_dogrulama')
 
-        if yeni_sifre != sifre_dogrulama:
-            raise forms.ValidationError('Parolalar eşleşmiyor')
-
-        return cleaned_data
-
         if yeni_sifre and sifre_dogrulama and yeni_sifre != sifre_dogrulama:
             raise forms.ValidationError('Parolalar eşleşmiyor')
 
