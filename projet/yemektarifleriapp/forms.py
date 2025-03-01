@@ -8,8 +8,8 @@ class CustomUserRegisterForm(UserCreationForm):
     ad = forms.CharField(max_length=255, required=True, label="Ad")
     soyad = forms.CharField(max_length=255, required=True, label="Soyad")
     email = forms.EmailField(required=True, label="E-Posta")
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    sifre = forms.CharField(widget=forms.PasswordInput)
+    sifre_dogrulama = forms.CharField(widget=forms.PasswordInput)
     dogum_tarihi = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     boy = forms.DecimalField(max_digits=5, decimal_places=2)
     kilo = forms.DecimalField(max_digits=5, decimal_places=2)
@@ -20,15 +20,15 @@ class CustomUserRegisterForm(UserCreationForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        password = cleaned_data.get('password')
-        confirm_password = cleaned_data.get('confirm_password')
+        password = cleaned_data.get('sifre')
+        confirm_password = cleaned_data.get('sifre_dogrulama')
 
-        if password and confirm_password and password != confirm_password:
+        if sifre and sifre_dogrulama and sifre != sifre_dogrulama:
             raise forms.ValidationError('Parolalar eşleşmiyor')
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.set_password(self.cleaned_data['password'])
+        user.set_password(self.cleaned_data['sifre'])
         
         if commit:
             user.save()
@@ -47,8 +47,8 @@ class LoginForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        giris = cleaned_data.get('login')
-        sifre = cleaned_data.get('password')
+        giris = cleaned_data.get('giris')
+        sifre = cleaned_data.get('sifre')
 
         try:
             user = get_user_model().objects.get(kullanici_adi=login)
