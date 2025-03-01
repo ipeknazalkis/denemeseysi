@@ -7,21 +7,14 @@ def kayit_view(request):
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('hosgeldin', ad=user.ad, soyad=user.soyad)
+            return redirect('kayit_hosgeldin', ad=user.ad, soyad=user.soyad)
     else:
         form = CustomUserRegisterForm()
     
     return render(request, 'kayit.html', {'form': form})
 
-def hosgeldin_view(request, first_name, last_name):
-    return render(request, 'hoshosgeldin.html', {'first_name': first_name, 'last_name': last_name})
-
-
-
-
-def hosgeldin(request):
-    return render(request, "hesaplar/hosgeldin.html", {"kullanici": request.user})
-
+def kayit_hosgeldin_view(request, first_name, last_name):
+    return render(request, 'kayit_hoshosgeldin.html', {'ad': ad, 'soyad': soyad})
 
 
 
