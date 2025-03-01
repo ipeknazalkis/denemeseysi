@@ -99,5 +99,3 @@ def sifre_sifirlama(request, uidb64, token):
 
 
 
-    
-    return render(request, "home.html", {"tarifler": tarifler, "query": query})
