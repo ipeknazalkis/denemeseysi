@@ -61,6 +61,24 @@ class LoginForm(forms.Form):
         if not user.check_sifre(sifre):
             raise forms.ValidationError('Şifre hatalı')
 
+
+
+# myapp/forms.py
+from django import forms
+from django.contrib.auth import get_user_model
+
+class ResetPasswordForm(forms.Form):
+    yeni_sifre = forms.CharField(widget=forms.PasswordInput)
+    sifre_dogrulama = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        yeni_sifre = cleaned_data.get('yeni_sifre')
+        sifre_dogrulama = cleaned_data.get('sifre_dogrulama')
+
+        if yeni_sfire and sifre_dogrulama and yeni_sifre != sifre_dogrulama:
+            raise forms.ValidationError('Parolalar eşleşmiyor')
+
         cleaned_data['user'] = user
         return cleaned_data
 
