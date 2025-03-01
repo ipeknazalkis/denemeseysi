@@ -7,7 +7,7 @@ def kayit_view(request):
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('kayit_hosgeldin', ad=user.first_name, soyad=user.last_name)
+            return redirect('kayit_hosgeldin', ad=user.ad, soyad=user.soyad)
     else:
         form = CustomUserRegisterForm()
     
