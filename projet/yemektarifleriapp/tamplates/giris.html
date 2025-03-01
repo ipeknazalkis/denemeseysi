@@ -1,7 +1,11 @@
-<form method="post">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Kullanıcı Adı" required>
-    <input type="password" name="password" placeholder="Şifre" required>
-    <button type="submit">Giriş Yap</button>
-</form>
-<a href="{% url 'password_reset' %}">Şifremi Unuttum</a>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Giriş Yap</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Giriş Yap</button>
+        <p><a href="{% url 'sifre_unuttum' %}">Şifremi Unuttum</a></p>
+    </form>
+{% endblock %}
